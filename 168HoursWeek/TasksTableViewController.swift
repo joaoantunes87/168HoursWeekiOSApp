@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TasksTableViewController: UITableViewController {
 
@@ -37,6 +38,15 @@ class TasksTableViewController: UITableViewController {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         return 0
+    }
+    
+    func insertTask() {
+        var coreDataStack: CoreDataStack = CoreDataStack.defaultStack
+        var task: Task = NSEntityDescription.insertNewObjectForEntityForName("Task", inManagedObjectContext: coreDataStack.managedObjectContext!) as Task
+        var currentDate: NSDate = NSDate()
+        task.startTimestamp = currentDate.timeIntervalSince1970
+        //var todaysTimestamp: Int64 = NSDate().timeIntervalSince1970()
+        coreDataStack.saveContext()
     }
 
     /*
