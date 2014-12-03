@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="eji-AC-ajy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="kq2-FQ-4RI">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
-        <!--Tasks Table View Controller-->
+        <!--168 Hours Week-->
         <scene sceneID="Hbl-ZP-DOe">
             <objects>
                 <tableViewController id="eji-AC-ajy" customClass="TasksTableViewController" customModule="_68HoursWeek" customModuleProvider="target" sceneMemberID="viewController">
@@ -13,11 +13,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="0ep-8N-xEn">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LogCell" id="0ep-8N-xEn" customClass="LogTableViewCell" customModule="_68HoursWeek" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0ep-8N-xEn" id="1Fi-r5-24p">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Dps-FG-mMm">
+                                            <rect key="frame" x="257" y="7" width="44" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Action"/>
+                                            <connections>
+                                                <action selector="stopOrStartLog" destination="0ep-8N-xEn" eventType="touchUpInside" id="H1Y-tI-8Aq"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wBD-5Y-wGv">
+                                            <rect key="frame" x="8" y="11" width="241" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="18"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="actionButton" destination="Dps-FG-mMm" id="Of0-Rz-XfG"/>
+                                    <outlet property="taskTypeNameLabel" destination="wBD-5Y-wGv" id="R5z-DQ-Muw"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -25,8 +46,33 @@
                             <outlet property="delegate" destination="eji-AC-ajy" id="5KP-Xc-nl5"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="168 Hours Week" id="FRM-Lk-mJL">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ETz-P4-dFu">
+                            <connections>
+                                <action selector="addTaskType:" destination="eji-AC-ajy" id="HQb-Am-6Dk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CXF-RS-LuQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="665" y="165"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FzN-Xa-E24">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kq2-FQ-4RI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TFB-i3-lf4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eji-AC-ajy" kind="relationship" relationship="rootViewController" id="1eW-Y6-BPl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1wD-rI-iqU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="133" y="165"/>
         </scene>

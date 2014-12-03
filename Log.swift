@@ -1,18 +1,19 @@
 //
-//  Task.swift
+//  Log.swift
 //  168HoursWeek
 //
-//  Created by João Antunes on 27/11/2014.
+//  Created by João Antunes on 01/12/2014.
 //  Copyright (c) 2014 InverseLife. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-class Task: NSManagedObject {
+@objc(Log)
+class Log: NSManagedObject {
 
     @NSManaged var startTimestamp: NSTimeInterval
     @NSManaged var endTimestamp: NSTimeInterval
-    @NSManaged var taskType: TaskType
+    @NSManaged var type: TaskType
 
 }

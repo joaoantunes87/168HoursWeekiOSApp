@@ -28,7 +28,7 @@ class CoreDataStack {
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.inverselife._68HoursWeek" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        //println("Url: \(urls[urls.count-1] as NSURL)")
+        println("Url: \(urls[urls.count-1] as NSURL)")
         return urls[urls.count-1] as NSURL
         }()
     
