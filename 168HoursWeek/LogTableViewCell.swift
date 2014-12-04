@@ -13,6 +13,7 @@ class LogTableViewCell: UITableViewCell {
 
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var taskTypeNameLabel: UILabel!
+    @IBOutlet weak var weekTimeLabel: UILabel!
    
     var taskType: TaskType?
     

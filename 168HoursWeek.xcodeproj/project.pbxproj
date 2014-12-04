@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7424A2DC1A2CAB7200EA42B5 /* LogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7424A2DB1A2CAB7200EA42B5 /* LogTableViewCell.swift */; };
+		745B759E1A3075A60024F118 /* TaskTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B759D1A3075A60024F118 /* TaskTypeManager.swift */; };
 		7478D14D1A2CB64200F9FA86 /* _68HoursWeek.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7478D14B1A2CB64200F9FA86 /* _68HoursWeek.xcdatamodeld */; };
 		7478D14F1A2CB6F100F9FA86 /* TaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7478D14E1A2CB6F100F9FA86 /* TaskType.swift */; };
 		7478D1511A2CB6F100F9FA86 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7478D1501A2CB6F100F9FA86 /* Log.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		7424A2DB1A2CAB7200EA42B5 /* LogTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogTableViewCell.swift; sourceTree = "<group>"; };
+		745B759D1A3075A60024F118 /* TaskTypeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTypeManager.swift; sourceTree = "<group>"; };
 		7478D14C1A2CB64200F9FA86 /* _68HoursWeek.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = _68HoursWeek.xcdatamodel; sourceTree = "<group>"; };
 		7478D14E1A2CB6F100F9FA86 /* TaskType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskType.swift; path = ../TaskType.swift; sourceTree = "<group>"; };
 		7478D1501A2CB6F100F9FA86 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = ../Log.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 		749078EE1A2765A500EFC907 /* 168HoursWeek */ = {
 			isa = PBXGroup;
 			children = (
+				745B759D1A3075A60024F118 /* TaskTypeManager.swift */,
 				749078F11A2765A500EFC907 /* AppDelegate.swift */,
 				749079141A27670700EFC907 /* TasksTableViewController.swift */,
 				749079161A276FCD00EFC907 /* CoreDataStack.swift */,
@@ -239,6 +242,7 @@
 				7478D1511A2CB6F100F9FA86 /* Log.swift in Sources */,
 				749079171A276FCD00EFC907 /* CoreDataStack.swift in Sources */,
 				7478D1551A2F4C8C00F9FA86 /* ColorWheel.swift in Sources */,
+				745B759E1A3075A60024F118 /* TaskTypeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

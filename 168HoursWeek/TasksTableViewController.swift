@@ -55,15 +55,9 @@ class TasksTableViewController: UITableViewController, NSFetchedResultsControlle
             
             var taskName: String = alertView.textFieldAtIndex(0)!.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             if !taskName.isEmpty {
-                // TODO check if task already exists if not add
-                // Limit the num of task type -- Add more on premium
-                println("TaskName: \(taskName)")
-                var coreDataStack: CoreDataStack = CoreDataStack.defaultStack
-                var colorHex: String = ColorWheel.sharedInstance.nextHexColor()
-                var taskType: TaskType = NSEntityDescription.insertNewObjectForEntityForName("TaskType", inManagedObjectContext: coreDataStack.managedObjectContext!) as TaskType
-                taskType.colorHex = colorHex
-                taskType.name = taskName
-                coreDataStack.saveContext()
+                TaskTypeManager.sharedInstance.createAndSaveTaskTypeWithName(taskName)
+            } else {
+                
             }
             
         }
@@ -152,11 +146,10 @@ class TasksTableViewController: UITableViewController, NSFetchedResultsControlle
         self.tableView.endUpdates()
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 56
+    }
     
-    
-    
-    
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

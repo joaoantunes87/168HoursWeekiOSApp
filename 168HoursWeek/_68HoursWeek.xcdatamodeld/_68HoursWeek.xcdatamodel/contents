@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Log" representedClassName="Log" syncable="YES">
         <attribute name="endTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="startTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
@@ -8,9 +8,10 @@
     <entity name="TaskType" representedClassName="TaskType" syncable="YES">
         <attribute name="colorHex" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="TaskType" positionX="-63" positionY="-18" width="128" height="75"/>
         <element name="Log" positionX="-54" positionY="9" width="128" height="90"/>
+        <element name="TaskType" positionX="-63" positionY="-18" width="128" height="90"/>
     </elements>
 </model>

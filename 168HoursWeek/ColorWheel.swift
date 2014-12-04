@@ -8,25 +8,8 @@
 
 import Foundation
 import UIKit
-import CoreData
 
 class ColorWheel {
-    
-    var colors: Array<String> = ["#ff001e",
-                                 "#f13dff",
-                                 "#68ff45",
-                                 "#39dbff",
-                                 "#2a37ff",
-                                 "#f6ff09",
-                                 "#f7bb0f",
-                                 "#f4a279",
-                                 "#346f2c",
-                                 "#ecc0c6"
-    ]
-    
-    init() {
-        self.loadColors()
-    }
     
     class var sharedInstance: ColorWheel {
         struct Static {
@@ -40,14 +23,6 @@ class ColorWheel {
         
         return Static.instance!
         
-    }
-    
-    func nextHexColor() -> String {
-        var unsignedArrayCount = UInt32(self.colors.count)
-        var randomNumber = Int(arc4random_uniform(unsignedArrayCount))
-        var hexColor: String = self.colors[randomNumber]
-        self.colors.removeAtIndex(randomNumber)
-        return hexColor
     }
 
     func convertHexColorStringToUiColor(hexColor: String) -> UIColor {
@@ -81,26 +56,6 @@ class ColorWheel {
             print("invalid rgb string, missing '#' as prefix")
         }
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
-    }
-    
-    private func loadColors() -> Void {
-
-        var coreDataStack: CoreDataStack = CoreDataStack.defaultStack
-        var fetchRequest: NSFetchRequest = NSFetchRequest(entityName: "TaskType")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-
-        if let tasks = coreDataStack.managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [TaskType] {
-            println("Tasks Count: \(tasks.count)")
-            for task:TaskType in tasks {
-                for var index = 0; index < self.colors.count; index++ {
-                    if task.colorHex == colors[index] {
-                        self.colors.removeAtIndex(index)
-                    }
-                }
-            }
-            
-        }
-        
     }
     
 }
