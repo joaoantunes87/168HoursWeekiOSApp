@@ -15,26 +15,5 @@ class TaskType: NSManagedObject {
     @NSManaged var name: String
     @NSManaged var colorHex: String
     @NSManaged var sid: String
-    
-    func isRunning() -> Bool {
-        var taskTypeRunning: TaskType! = TaskTypeManager.sharedInstance.currentTaskRunning()
-        return taskTypeRunning != nil && taskTypeRunning.sid == self.sid
-    }
-    
-    func toogleAction() -> Void {
-        if self.isRunning() {
-            self.stop()
-        } else {
-            self.play()
-        }
-    }
-    
-    func play() -> Void {
-        
-    }
-    
-    func stop() -> Void {
-        
-    }
 
 }

@@ -20,6 +20,7 @@
 		7490790B1A2765A500EFC907 /* _68HoursWeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7490790A1A2765A500EFC907 /* _68HoursWeekTests.swift */; };
 		749079151A27670700EFC907 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749079141A27670700EFC907 /* TasksTableViewController.swift */; };
 		749079171A276FCD00EFC907 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749079161A276FCD00EFC907 /* CoreDataStack.swift */; };
+		74A35E311A322E38006F0566 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A35E301A322E38006F0566 /* State.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		7490790A1A2765A500EFC907 /* _68HoursWeekTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _68HoursWeekTests.swift; sourceTree = "<group>"; };
 		749079141A27670700EFC907 /* TasksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
 		749079161A276FCD00EFC907 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		74A35E301A322E38006F0566 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 		749078EE1A2765A500EFC907 /* 168HoursWeek */ = {
 			isa = PBXGroup;
 			children = (
+				74A35E301A322E38006F0566 /* State.swift */,
 				745B759D1A3075A60024F118 /* TaskTypeManager.swift */,
 				749078F11A2765A500EFC907 /* AppDelegate.swift */,
 				749079141A27670700EFC907 /* TasksTableViewController.swift */,
@@ -237,6 +240,7 @@
 				7424A2DC1A2CAB7200EA42B5 /* LogTableViewCell.swift in Sources */,
 				749079151A27670700EFC907 /* TasksTableViewController.swift in Sources */,
 				749078F21A2765A500EFC907 /* AppDelegate.swift in Sources */,
+				74A35E311A322E38006F0566 /* State.swift in Sources */,
 				7478D14D1A2CB64200F9FA86 /* _68HoursWeek.xcdatamodeld in Sources */,
 				7478D14F1A2CB6F100F9FA86 /* TaskType.swift in Sources */,
 				7478D1511A2CB6F100F9FA86 /* Log.swift in Sources */,

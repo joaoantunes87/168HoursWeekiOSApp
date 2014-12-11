@@ -80,8 +80,71 @@ class TaskTypeManager {
         
     }
     
-    func currentTaskRunning() -> TaskType! {
-        return nil
+    func formatSecondsToPresent(seconds: Int) -> String {
+
+        if seconds == 0 {
+            return "0s"
+        }
+        
+        var days: Int = seconds / ( 24 * 60 * 60 )
+        var daysSecondsLeft: Int = seconds % ( 24 * 60 * 60 )
+        var hours: Int = daysSecondsLeft / ( 60 * 60 )
+        var hoursSecondsLeft: Int = daysSecondsLeft % ( 60 * 60 )
+        var minutes: Int = hoursSecondsLeft / 60
+        var seconds: Int = hoursSecondsLeft % 60
+        
+        var formattedString: String = "\(seconds)s"
+        if minutes > 0 {
+            formattedString = "\(minutes)m " + formattedString
+        }
+        
+        if ( hours > 0 ) {
+            formattedString = "\(hours)h " + formattedString
+        }
+        
+        if ( days > 0 ) {
+            formattedString = "\(days)d " + formattedString
+        }
+        
+        return formattedString
+        
+    }
+    
+    func taskState(task: TaskType) -> State {
+       
+        if let currentLogRunning: Log = TaskTypeManager.sharedInstance.currentLogRunning() {
+            if ( currentLogRunning.type.sid == task.sid) {
+                return State.Running
+            } else {
+                return State.Stopped
+            }
+        }
+        
+        return State.Stopped
+        
+    }
+    
+    func toggleForTask(task: TaskType) -> State {
+        
+        var toStartTask = true
+        var coreDataStack: CoreDataStack = CoreDataStack.defaultStack
+        if let currentLogRunning: Log = TaskTypeManager.sharedInstance.currentLogRunning() {
+            currentLogRunning.endTimestamp = NSDate().timeIntervalSinceReferenceDate
+            toStartTask = !(currentLogRunning.type.sid == task.sid)
+        }
+        
+        if ( toStartTask ) {
+            var log: Log = NSEntityDescription.insertNewObjectForEntityForName("Log", inManagedObjectContext: coreDataStack.managedObjectContext!) as Log
+            log.startTimestamp = NSDate().timeIntervalSinceReferenceDate
+            log.type = task
+            coreDataStack.saveContext()
+            
+            return State.Running
+        }
+        
+        coreDataStack.saveContext()
+        return State.Stopped
+        
     }
     
     func deleteTaskType(task: TaskType) {
@@ -89,6 +152,77 @@ class TaskTypeManager {
         // TODO check if have no logs on the current week
         
         // TODO after deleted return color
+        
+    }
+    
+    func calculateWeekTimeInSecondsForTask(task: TaskType) -> Int {
+        
+        var calendar: NSCalendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
+        calendar.firstWeekday = 2 // monday
+        var currentDate: NSDate = NSDate()
+        var startOfTheWeek: NSDate? = nil
+        var interval: NSTimeInterval = 0
+        
+        calendar.rangeOfUnit(NSCalendarUnit.WeekCalendarUnit, startDate: &startOfTheWeek, interval: &interval, forDate: currentDate)
+        var endOfWeek: NSDate = startOfTheWeek!.dateByAddingTimeInterval(interval - 1)
+        
+        var startOfWeekTimestamp: Int = Int(startOfTheWeek!.timeIntervalSinceReferenceDate)
+        var endOfWeekTimestamp: Int = Int(endOfWeek.timeIntervalSinceReferenceDate)
+        var currentDateTimestamp: Int = Int(currentDate.timeIntervalSinceReferenceDate)
+        
+        var weekTimeInSeconds: Int = 0
+        var coreDataStack: CoreDataStack = CoreDataStack.defaultStack
+        var fetchRequest: NSFetchRequest = NSFetchRequest(entityName: "Log")
+        fetchRequest.predicate = NSPredicate(format: "type == %@ AND ( endTimestamp == nil OR ( startTimestamp >= %@ AND startTimestamp <= %@ ) OR ( endTimestamp >= %@ AND endTimestamp <= %@ ) )", task, startOfTheWeek!, endOfWeek, startOfTheWeek!, endOfWeek)
+        if let logs = coreDataStack.managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Log] {
+
+            for log:Log in logs {
+
+                var endTimestamp: Int = Int(log.endTimestamp)
+                var startTimestamp: Int = Int(log.startTimestamp)
+                if endTimestamp == 0 {
+                    weekTimeInSeconds += ( currentDateTimestamp - startTimestamp )
+                } else if startTimestamp >= startOfWeekTimestamp && endTimestamp <= endOfWeekTimestamp {
+                    weekTimeInSeconds += ( endTimestamp - startTimestamp )
+                } else if startTimestamp < startOfWeekTimestamp {
+                    weekTimeInSeconds += ( endTimestamp - startOfWeekTimestamp )
+                } else if endTimestamp > endOfWeekTimestamp {
+                    weekTimeInSeconds += ( endOfWeekTimestamp - startTimestamp )
+                }
+                
+            }
+            
+        }
+        
+        return weekTimeInSeconds
+        
+    }
+    
+    private func currentLogRunning() -> Log? {
+        
+        var coreDataStack: CoreDataStack = CoreDataStack.defaultStack
+        var fetchRequest: NSFetchRequest = NSFetchRequest(entityName: "Log")
+        fetchRequest.predicate = NSPredicate(format: "endTimestamp = nil")
+        if let currentLog = coreDataStack.managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Log] {
+            
+            if ( currentLog.count == 1 ) {
+                return currentLog.first?
+            }
+            
+        }
+        
+        return nil
+        
+    }
+    
+    private func currentTaskRunning() -> TaskType? {
+        
+        if let currentLogRunning: Log = currentLogRunning() {
+            return currentLogRunning.type
+        }
+        
+        return nil
+        
     }
     
     private func nextHexColor() -> String {

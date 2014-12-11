@@ -64,7 +64,6 @@ class TasksTableViewController: UITableViewController, NSFetchedResultsControlle
         
     }
     
-
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -106,7 +105,7 @@ class TasksTableViewController: UITableViewController, NSFetchedResultsControlle
         let cell: LogTableViewCell = tableView.dequeueReusableCellWithIdentifier("LogCell", forIndexPath: indexPath) as LogTableViewCell
         var taskType: TaskType = self.fetchedResultsController.objectAtIndexPath(indexPath) as TaskType
         cell.taskType = taskType
-        cell.configureCell()
+        cell.configureCell(self.tableView)
         return cell
     }
     
