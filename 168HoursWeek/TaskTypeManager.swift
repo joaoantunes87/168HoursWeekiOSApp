@@ -147,11 +147,19 @@ class TaskTypeManager {
         
     }
     
-    func deleteTaskType(task: TaskType) {
+    func deleteTaskType(task: TaskType) -> Bool {
 
-        // TODO check if have no logs on the current week
+        // check if have no logs on the current week
+        var logs: Array<Log> = self.weekLogsForTaskType(task)
+        if logs.count == 0 {
+            var coreDataStack: CoreDataStack = CoreDataStack.defaultStack
+            self.colors.append(task.colorHex)
+            coreDataStack.managedObjectContext?.deleteObject(task)
+            coreDataStack.saveContext()
+            return true
+        }
         
-        // TODO after deleted return color
+        return false
         
     }
     
@@ -171,30 +179,45 @@ class TaskTypeManager {
         var currentDateTimestamp: Int = Int(currentDate.timeIntervalSinceReferenceDate)
         
         var weekTimeInSeconds: Int = 0
-        var coreDataStack: CoreDataStack = CoreDataStack.defaultStack
-        var fetchRequest: NSFetchRequest = NSFetchRequest(entityName: "Log")
-        fetchRequest.predicate = NSPredicate(format: "type == %@ AND ( endTimestamp == nil OR ( startTimestamp >= %@ AND startTimestamp <= %@ ) OR ( endTimestamp >= %@ AND endTimestamp <= %@ ) )", task, startOfTheWeek!, endOfWeek, startOfTheWeek!, endOfWeek)
-        if let logs = coreDataStack.managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Log] {
-
-            for log:Log in logs {
-
-                var endTimestamp: Int = Int(log.endTimestamp)
-                var startTimestamp: Int = Int(log.startTimestamp)
-                if endTimestamp == 0 {
-                    weekTimeInSeconds += ( currentDateTimestamp - startTimestamp )
-                } else if startTimestamp >= startOfWeekTimestamp && endTimestamp <= endOfWeekTimestamp {
-                    weekTimeInSeconds += ( endTimestamp - startTimestamp )
-                } else if startTimestamp < startOfWeekTimestamp {
-                    weekTimeInSeconds += ( endTimestamp - startOfWeekTimestamp )
-                } else if endTimestamp > endOfWeekTimestamp {
-                    weekTimeInSeconds += ( endOfWeekTimestamp - startTimestamp )
-                }
-                
+        for log:Log in self.weekLogsForTaskType(task) {
+            
+            var endTimestamp: Int = Int(log.endTimestamp)
+            var startTimestamp: Int = Int(log.startTimestamp)
+            if endTimestamp == 0 {
+                weekTimeInSeconds += ( currentDateTimestamp - startTimestamp )
+            } else if startTimestamp >= startOfWeekTimestamp && endTimestamp <= endOfWeekTimestamp {
+                weekTimeInSeconds += ( endTimestamp - startTimestamp )
+            } else if startTimestamp < startOfWeekTimestamp {
+                weekTimeInSeconds += ( endTimestamp - startOfWeekTimestamp )
+            } else if endTimestamp > endOfWeekTimestamp {
+                weekTimeInSeconds += ( endOfWeekTimestamp - startTimestamp )
             }
             
         }
         
         return weekTimeInSeconds
+        
+    }
+    
+    private func weekLogsForTaskType(task:TaskType) -> Array<Log> {
+        
+        var calendar: NSCalendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
+        calendar.firstWeekday = 2 // monday
+        var currentDate: NSDate = NSDate()
+        var startOfTheWeek: NSDate? = nil
+        var interval: NSTimeInterval = 0
+        
+        calendar.rangeOfUnit(NSCalendarUnit.WeekCalendarUnit, startDate: &startOfTheWeek, interval: &interval, forDate: currentDate)
+        var endOfWeek: NSDate = startOfTheWeek!.dateByAddingTimeInterval(interval - 1)
+        
+        var coreDataStack: CoreDataStack = CoreDataStack.defaultStack
+        var fetchRequest: NSFetchRequest = NSFetchRequest(entityName: "Log")
+        fetchRequest.predicate = NSPredicate(format: "type == %@ AND ( endTimestamp == nil OR ( startTimestamp >= %@ AND startTimestamp <= %@ ) OR ( endTimestamp >= %@ AND endTimestamp <= %@ ) )", task, startOfTheWeek!, endOfWeek, startOfTheWeek!, endOfWeek)
+        if let logs = coreDataStack.managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [Log] {
+            return logs
+        }
+        
+        return Array<Log>()
         
     }
     

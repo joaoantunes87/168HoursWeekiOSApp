@@ -90,9 +90,14 @@ class TasksTableViewController: UITableViewController, NSFetchedResultsControlle
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         var taskType: TaskType = self.fetchedResultsController.objectAtIndexPath(indexPath) as TaskType
-        var coreDataStack: CoreDataStack = CoreDataStack.defaultStack
-        coreDataStack.managedObjectContext?.deleteObject(taskType)
-        coreDataStack.saveContext()
+        if TaskTypeManager.sharedInstance.deleteTaskType(taskType) == false {
+            let cannotDeleteAlert = UIAlertController(title: "Error", message: "Task can not be deleted because it has week logs. Try on the beginning of next week", preferredStyle: .Alert)
+            
+            let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            cannotDeleteAlert.addAction(okButton)
+            
+            self.presentViewController(cannotDeleteAlert, animated: true, completion: nil)
+        }
     }
     
     func taskTypeListFetchRequest() -> NSFetchRequest {
@@ -118,10 +123,7 @@ class TasksTableViewController: UITableViewController, NSFetchedResultsControlle
         case .Insert:
             self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         case .Delete:
-            self.tableView.deleteRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-            break
-        case .Update:
-            self.tableView.reloadRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
             break
         default:
             break
