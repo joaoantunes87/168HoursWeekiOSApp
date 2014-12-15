@@ -31,6 +31,8 @@ class TasksTableViewController: UITableViewController, NSFetchedResultsControlle
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.fetchedResultsController!.performFetch(nil)
     }
 
@@ -148,7 +150,21 @@ class TasksTableViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenHeight: CGFloat = screenSize.height;
+        
+        let navigatonBarSize: CGRect? = self.navigationController?.navigationBar.bounds
+        let navigationBarHeight: CGFloat = navigatonBarSize!.height
+        
+        if let sections = self.fetchedResultsController.sections {
+            var sectionInfo: NSFetchedResultsSectionInfo = sections[0] as NSFetchedResultsSectionInfo
+            CGFloat(sectionInfo.numberOfObjects)
+            return ( screenHeight - navigationBarHeight ) / CGFloat(sectionInfo.numberOfObjects)
+        }
+        
         return 56
+        
     }
     
     /*
