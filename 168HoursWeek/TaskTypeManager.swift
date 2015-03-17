@@ -24,10 +24,10 @@ class TaskTypeManager {
     var colors: Array<String> = [
         "#ff001e",
         "#f13dff",
-        "#68ff45",
+        "#309c58",
         "#39dbff",
         "#2a37ff",
-        "#f6ff09",
+        "#4b4f49",
         "#f7bb0f",
         "#f4a279",
         "#346f2c",
@@ -43,10 +43,14 @@ class TaskTypeManager {
         "Exercising",
         "Surfing Internet",
         "Relaxing",
-        "Nothing"
+        "Nothing",
+        "Playing"
     ]
     
+    var maxTasksNum = 0
+    
     init() {
+        self.maxTasksNum = self.initialTasks.count
         self.loadTasks()
     }
     
@@ -64,12 +68,31 @@ class TaskTypeManager {
         
     }
     
-    func createAndSaveTaskTypeWithName(taskName: String) -> Void {
+    func createAndSaveTaskTypeWithName(taskName: String) -> Bool {
         var coreDataStack: CoreDataStack = CoreDataStack.defaultStack
         
-        // TODO check if Task Name already exist
+        // Check if is yet possible to create new tasks
+        var fetchRequest: NSFetchRequest = NSFetchRequest(entityName: "TaskType")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        if let tasks = coreDataStack.managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [TaskType] {
+            
+            if tasks.count >= self.maxTasksNum {
+                return false
+            }
+            
+        }
         
-        // TODO Check if is yet possible to create new tasks
+        // check if Task Name already exist
+        var fetchByNameRequest: NSFetchRequest = NSFetchRequest(entityName: "TaskType")
+        fetchByNameRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        fetchByNameRequest.predicate = NSPredicate(format: "sid == %@", taskName.lowercaseString)
+        if let task = coreDataStack.managedObjectContext!.executeFetchRequest(fetchByNameRequest, error: nil) as? [TaskType] {
+
+            if task.count == 1 {
+                return false
+            }
+            
+        }
         
         var colorHex: String = self.nextHexColor()
         var taskType: TaskType = NSEntityDescription.insertNewObjectForEntityForName("TaskType", inManagedObjectContext: coreDataStack.managedObjectContext!) as TaskType
@@ -77,6 +100,8 @@ class TaskTypeManager {
         taskType.name = taskName
         taskType.sid = taskName.lowercaseString
         coreDataStack.saveContext()
+        
+        return true
         
     }
     
@@ -166,7 +191,7 @@ class TaskTypeManager {
     func calculateWeekTimeInSecondsForTask(task: TaskType) -> Int {
         
         var calendar: NSCalendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
-        calendar.firstWeekday = 2 // monday
+        calendar.firstWeekday = 2                   // monday
         var currentDate: NSDate = NSDate()
         var startOfTheWeek: NSDate? = nil
         var interval: NSTimeInterval = 0
@@ -233,6 +258,7 @@ class TaskTypeManager {
             }
             
         }
+        
         
         return nil
         

@@ -26,14 +26,23 @@ class TasksTableViewController: UITableViewController, NSFetchedResultsControlle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        TaskTypeManager.sharedInstance
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.fetchedResultsController!.performFetch(nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"reloadData", name:
+            UIApplicationWillEnterForegroundNotification, object: nil)
+        
+    }
+    
+    func reloadData() {
+        self.tableView.reloadData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,21 +62,30 @@ class TasksTableViewController: UITableViewController, NSFetchedResultsControlle
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         
-        if ( buttonIndex == 1 ) {
-            
-            var taskName: String = alertView.textFieldAtIndex(0)!.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-            if !taskName.isEmpty {
-                TaskTypeManager.sharedInstance.createAndSaveTaskTypeWithName(taskName)
+        if buttonIndex == 1 {
+            let taskName = alertView.textFieldAtIndex(0)?.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            if !taskName!.isEmpty {
+                if !TaskTypeManager.sharedInstance.createAndSaveTaskTypeWithName(taskName!) {
+                    let cannotCreateAlert = UIAlertController(title: "Error", message: "Task can not be created. You can only have \(TaskTypeManager.sharedInstance.maxTasksNum) Tasks and the task name must be unique. You can delete tasks", preferredStyle: .Alert)
+                    
+                    let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    cannotCreateAlert.addAction(okButton)
+                    
+                    self.presentViewController(cannotCreateAlert, animated: true, completion: nil)
+                }
             } else {
+                let cannotCreateAlert = UIAlertController(title: "Error", message: "Task Name is required", preferredStyle: .Alert)
                 
+                let okButton = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                cannotCreateAlert.addAction(okButton)
+                
+                self.presentViewController(cannotCreateAlert, animated: true, completion: nil)
             }
-            
         }
         
     }
     
     // MARK: - Table view data source
-
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
@@ -110,9 +128,12 @@ class TasksTableViewController: UITableViewController, NSFetchedResultsControlle
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: LogTableViewCell = tableView.dequeueReusableCellWithIdentifier("LogCell", forIndexPath: indexPath) as LogTableViewCell
-        var taskType: TaskType = self.fetchedResultsController.objectAtIndexPath(indexPath) as TaskType
-        cell.taskType = taskType
-        cell.configureCell(self.tableView)
+        if let taskType: TaskType = self.fetchedResultsController.objectAtIndexPath(indexPath) as? TaskType {
+            cell.taskType = taskType
+            cell.configureCell(self.tableView)
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         return cell
     }
     
@@ -166,50 +187,5 @@ class TasksTableViewController: UITableViewController, NSFetchedResultsControlle
         return 56
         
     }
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
