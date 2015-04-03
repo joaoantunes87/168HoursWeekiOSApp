@@ -7,13 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7424A2DC1A2CAB7200EA42B5 /* LogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7424A2DB1A2CAB7200EA42B5 /* LogTableViewCell.swift */; };
+		745B759E1A3075A60024F118 /* TaskTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745B759D1A3075A60024F118 /* TaskTypeManager.swift */; };
+		7478D14D1A2CB64200F9FA86 /* _68HoursWeek.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7478D14B1A2CB64200F9FA86 /* _68HoursWeek.xcdatamodeld */; };
+		7478D14F1A2CB6F100F9FA86 /* TaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7478D14E1A2CB6F100F9FA86 /* TaskType.swift */; };
+		7478D1511A2CB6F100F9FA86 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7478D1501A2CB6F100F9FA86 /* Log.swift */; };
+		7478D1551A2F4C8C00F9FA86 /* ColorWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7478D1541A2F4C8C00F9FA86 /* ColorWheel.swift */; };
 		749078F21A2765A500EFC907 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749078F11A2765A500EFC907 /* AppDelegate.swift */; };
-		749078F51A2765A500EFC907 /* _68HoursWeek.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 749078F31A2765A500EFC907 /* _68HoursWeek.xcdatamodeld */; };
-		749078F71A2765A500EFC907 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749078F61A2765A500EFC907 /* ViewController.swift */; };
 		749078FA1A2765A500EFC907 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 749078F81A2765A500EFC907 /* Main.storyboard */; };
 		749078FC1A2765A500EFC907 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 749078FB1A2765A500EFC907 /* Images.xcassets */; };
 		749078FF1A2765A500EFC907 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 749078FD1A2765A500EFC907 /* LaunchScreen.xib */; };
 		7490790B1A2765A500EFC907 /* _68HoursWeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7490790A1A2765A500EFC907 /* _68HoursWeekTests.swift */; };
+		749079151A27670700EFC907 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749079141A27670700EFC907 /* TasksTableViewController.swift */; };
+		749079171A276FCD00EFC907 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749079161A276FCD00EFC907 /* CoreDataStack.swift */; };
+		74A35E311A322E38006F0566 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A35E301A322E38006F0566 /* State.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,17 +34,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7424A2DB1A2CAB7200EA42B5 /* LogTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogTableViewCell.swift; sourceTree = "<group>"; };
+		745B759D1A3075A60024F118 /* TaskTypeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTypeManager.swift; sourceTree = "<group>"; };
+		7478D14C1A2CB64200F9FA86 /* _68HoursWeek.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = _68HoursWeek.xcdatamodel; sourceTree = "<group>"; };
+		7478D14E1A2CB6F100F9FA86 /* TaskType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskType.swift; path = ../TaskType.swift; sourceTree = "<group>"; };
+		7478D1501A2CB6F100F9FA86 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = ../Log.swift; sourceTree = "<group>"; };
+		7478D1541A2F4C8C00F9FA86 /* ColorWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorWheel.swift; sourceTree = "<group>"; };
 		749078EC1A2765A500EFC907 /* 168HoursWeek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 168HoursWeek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		749078F01A2765A500EFC907 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		749078F11A2765A500EFC907 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		749078F41A2765A500EFC907 /* _68HoursWeek.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = _68HoursWeek.xcdatamodel; sourceTree = "<group>"; };
-		749078F61A2765A500EFC907 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		749078F91A2765A500EFC907 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		749078FB1A2765A500EFC907 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		749078FE1A2765A500EFC907 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		749079041A2765A500EFC907 /* 168HoursWeekTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 168HoursWeekTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		749079091A2765A500EFC907 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7490790A1A2765A500EFC907 /* _68HoursWeekTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _68HoursWeekTests.swift; sourceTree = "<group>"; };
+		749079141A27670700EFC907 /* TasksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
+		749079161A276FCD00EFC907 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		74A35E301A322E38006F0566 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,12 +93,19 @@
 		749078EE1A2765A500EFC907 /* 168HoursWeek */ = {
 			isa = PBXGroup;
 			children = (
+				74A35E301A322E38006F0566 /* State.swift */,
+				745B759D1A3075A60024F118 /* TaskTypeManager.swift */,
 				749078F11A2765A500EFC907 /* AppDelegate.swift */,
-				749078F61A2765A500EFC907 /* ViewController.swift */,
+				749079141A27670700EFC907 /* TasksTableViewController.swift */,
+				749079161A276FCD00EFC907 /* CoreDataStack.swift */,
+				7424A2DB1A2CAB7200EA42B5 /* LogTableViewCell.swift */,
+				7478D1501A2CB6F100F9FA86 /* Log.swift */,
+				7478D14E1A2CB6F100F9FA86 /* TaskType.swift */,
+				7478D1541A2F4C8C00F9FA86 /* ColorWheel.swift */,
 				749078F81A2765A500EFC907 /* Main.storyboard */,
+				7478D14B1A2CB64200F9FA86 /* _68HoursWeek.xcdatamodeld */,
 				749078FB1A2765A500EFC907 /* Images.xcassets */,
 				749078FD1A2765A500EFC907 /* LaunchScreen.xib */,
-				749078F31A2765A500EFC907 /* _68HoursWeek.xcdatamodeld */,
 				749078EF1A2765A500EFC907 /* Supporting Files */,
 			);
 			path = 168HoursWeek;
@@ -164,6 +185,7 @@
 				TargetAttributes = {
 					749078EB1A2765A500EFC907 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 4325SL2386;
 					};
 					749079031A2765A500EFC907 = {
 						CreatedOnToolsVersion = 6.1;
@@ -215,9 +237,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				749078F71A2765A500EFC907 /* ViewController.swift in Sources */,
+				7424A2DC1A2CAB7200EA42B5 /* LogTableViewCell.swift in Sources */,
+				749079151A27670700EFC907 /* TasksTableViewController.swift in Sources */,
 				749078F21A2765A500EFC907 /* AppDelegate.swift in Sources */,
-				749078F51A2765A500EFC907 /* _68HoursWeek.xcdatamodeld in Sources */,
+				74A35E311A322E38006F0566 /* State.swift in Sources */,
+				7478D14D1A2CB64200F9FA86 /* _68HoursWeek.xcdatamodeld in Sources */,
+				7478D14F1A2CB6F100F9FA86 /* TaskType.swift in Sources */,
+				7478D1511A2CB6F100F9FA86 /* Log.swift in Sources */,
+				749079171A276FCD00EFC907 /* CoreDataStack.swift in Sources */,
+				7478D1551A2F4C8C00F9FA86 /* ColorWheel.swift in Sources */,
+				745B759E1A3075A60024F118 /* TaskTypeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +369,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = 168HoursWeek/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -350,6 +380,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = 168HoursWeek/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -409,6 +440,7 @@
 				749079101A2765A500EFC907 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		749079111A2765A500EFC907 /* Build configuration list for PBXNativeTarget "168HoursWeekTests" */ = {
 			isa = XCConfigurationList;
@@ -417,16 +449,17 @@
 				749079131A2765A500EFC907 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		749078F31A2765A500EFC907 /* _68HoursWeek.xcdatamodeld */ = {
+		7478D14B1A2CB64200F9FA86 /* _68HoursWeek.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				749078F41A2765A500EFC907 /* _68HoursWeek.xcdatamodel */,
+				7478D14C1A2CB64200F9FA86 /* _68HoursWeek.xcdatamodel */,
 			);
-			currentVersion = 749078F41A2765A500EFC907 /* _68HoursWeek.xcdatamodel */;
+			currentVersion = 7478D14C1A2CB64200F9FA86 /* _68HoursWeek.xcdatamodel */;
 			path = _68HoursWeek.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
